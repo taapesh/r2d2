@@ -1,0 +1,122 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>R2D2</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/hover.css" media="all">
+        <link rel="stylesheet" href="/static/css/main.css">
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <video autoplay loop poster="" id="bgvid">
+            <source src="/static/video/stars.mp4" type="video/mp4">
+        </video>
+
+        <audio id="theme">
+            <source src="/static/sound/star-wars.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="audio-enter">
+            <source src="/static/sound/r2d2-1.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="audio-exit">
+            <source src="/static/sound/r2d2-2.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- Header -->
+        <div id="header">
+
+        </div>
+        <!-- End header -->
+
+        <!-- Main content -->
+        <div id="body" align="center">
+            <img id="r2d2" class="r2d2 hvr-buzz-out" src="/static/img/r2d2.png"></img>
+            <div id="click-me" class="click-me">Click R2-D2!</div>
+            <div id="info" class="info">
+                <h1>R2-D2</h1>
+                <div id="close" class="close">x</div>
+                <div class="clearfix"></div>
+                <p>
+                    A resourceful astromech droid, R2-D2 served Padmé Amidala, Anakin Skywalker and Luke Skywalker in turn, showing great bravery in rescuing his masters and their friends from many perils. A skilled starship mechanic and fighter pilot's assistant, he formed an unlikely but enduring friendship with the fussy protocol droid C-3PO.
+                </p>
+            </div>
+            <img id="pause" class="pause hvr-grow" src="/static/img/pause.svg"></img>
+        </div>
+        <!-- End main content -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/static/js/jquery-1.11.3.min.js"><\/script>')</script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                var info = $('#info');
+                info.hide();
+                var r2d2 = $('#r2d2');
+                var click = $('#click-me');
+
+
+                var theme = document.getElementById('theme');
+                var audioEnter = document.getElementById('audio-enter');
+                var audioExit = document.getElementById('audio-exit');
+                theme.volume = .4;
+                theme.play();
+                
+                audioEnter.volume = 0.7;
+                audioExit.volume = 0.7;
+                
+                var open = false;
+                var playing = true;
+                var pause = $('#pause');
+
+                function toggle() {
+                    r2d2.toggleClass('toggled');
+                    info.slideToggle();
+                    click.fadeToggle();
+                    if (open) {
+                        audioExit.play();
+                    } else {
+                        audioEnter.play();
+                    }
+                    open = !open;
+                }
+
+                $('#r2d2').click(function() {
+                    toggle();
+                });
+                $('#close').click(function() {
+                    toggle();
+                });
+                pause.click(function() {
+                    if (playing) {
+                        theme.pause();
+                        pause.attr('src', '/static/img/play.svg');
+                    } else {
+                        theme.play();
+                        pause.attr('src', '/static/img/pause.svg');
+                    }
+                    playing = !playing;
+                });
+            });
+        </script>
+    </body>
+</html>
